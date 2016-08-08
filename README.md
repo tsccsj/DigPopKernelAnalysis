@@ -88,7 +88,7 @@ Input formate:
  - OutputFileName,InputDigPopNamePreNumber,MinRzn,NumberRzn,NorthBounds,EastBounds,SoutBounds,WestBounds,LatticeSize,KernelDiameter,HouseholdOrPopulationMap,SubPopulation,MapLogic
 
 Example:
- - 	../result/Relig_Buddhist_Young,/home/ygao29/data/digpop/rzn,1,3,2816700,322900,2526600,122500,1000,1000,P,!RELIG:2:2,!AGE:0:17
+ - ../result/Relig_Buddhist_Young,~/data/digpop/rzn,1,3,2816700,322900,2526600,122500,1000,1000,P,!RELIG:2:2,!AGE:0:17
 --------------------------------------------------------------------------------------------------
 DPIndicatorV4:
 
@@ -103,7 +103,7 @@ Input formate:
  - OutputFileName,InputDigPopNamePreNumber,MinRzn,NumberRzn,NorthBounds,EastBounds,SoutBounds,WestBounds,LatticeSize,KernelDiameter,HouseholdOrPopulationMap,SubPopulation,MapLogic
 
 Example:
- - 	../result/Relig_Buddhist_Young,/home/ygao29/data/digpop/rzn,1,3,2816700,322900,2526600,122500,1000,1000,P,RELIG:2:2,AGE:0:17
+ - ../result/Relig_Buddhist_Young,~/data/digpop/rzn,1,3,2816700,322900,2526600,122500,1000,1000,P,RELIG:2:2,AGE:0:17
 
 --------------------------------------------------------------------------------------------------
 DPIndicatorV3:
@@ -121,7 +121,7 @@ Input formate:
  - OutputFileName,InputDigPopNamePreNumber,MinRzn,NumberRzn,NorthBounds,EastBounds,SoutBounds,WestBounds,LatticeSize,KernelDiameter,HouseholdOrPopulationMap,MapLogic
 
 Example:
- -	../result/UtilAccess5_Kernel1600,/home/ygao29/data/digpop/rzn,1,5,2816700,322900,2526600,122500,200,1600,H,BD11A_TOILET:2:2&ELECTRC:2:2&BD11A_WATSRC:3:3|BD11A_TOILET:3:3&ELECTRC:2:2&BD11A_WATSRC:1:2
+ - ../result/UtilAccess5_Kernel1600,~/data/digpop/rzn,1,5,2816700,322900,2526600,122500,200,1600,H,BD11A_TOILET:2:2&ELECTRC:2:2&BD11A_WATSRC:3:3|BD11A_TOILET:3:3&ELECTRC:2:2&BD11A_WATSRC:1:2
 --------------------------------------------------------------------------------------------------
 DPIndicatorV2:
 
@@ -144,4 +144,4 @@ Input formate:
  - OutputFileName,InputDigPopNamePreNumber,MinRzn,NumberRzn,NorthBounds,EastBounds,SoutBounds,WestBounds,LatticeSize,KernelDiameter,HouseholdOrPopulationMap,MapLogic
 
 Example:
- -	../result/UtilAccess1,/home/ygao29/data/digpop/rzn,1,5,2816700,322900,2526600,122500,400,1000,H,BD11A_TOILET:1:1andELECTRC:1:1andBD11A_WATSRC:1:2
+ -	../result/UtilAccess1,~/data/digpop/rzn,1,5,2816700,322900,2526600,122500,400,1000,H,BD11A_TOILET:1:1andELECTRC:1:1andBD11A_WATSRC:1:2
