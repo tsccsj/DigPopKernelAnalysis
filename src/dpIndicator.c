@@ -5,12 +5,13 @@
 #include "dpbKDE.cuh"
 #include "rasterStat.cuh"
 
-//dpIndicator csvForMapsFromRealizations
+//DigPopKernelAnalysis csvForMapsFromRealizations
 int main(int argc, char ** argv)
 {
 	if(argc != 2)
 	{
-		printf("dpIndicator csvForMapsFromRealizations\n");
+		printf("Incorrect number of input arguments.\n");
+		printf("./DigPopKernelAnalysis csvForMapsFromRealizations\n");
 		exit(1);
 	}
 
