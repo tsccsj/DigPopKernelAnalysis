@@ -1,8 +1,81 @@
 # DigPopKernelAnalysis
+KernelAnalysis is software developed to create indicator maps from Digital Populations realizations based on the attributes of household attributes and person attributes. It aims to answer questions of this kind: give all or a subset of population (or households), what is the ratio of the population (or households) that meets certain standards. What does it do?
 
 Software instruction at
 http://digitalpopulations.pbworks.com/w/page/88807286/KernelAnalysis
 
+What does it do?
+For each of the Digital Populations realizations, it performs the following steps:
+ 1. Find the persons (or households) that belongs to the targeting sub-population by reading through the household and population files of this Digital Populations realization
+ 2. Find the persons (or households) within the sub-population that meet user-specific conditions (referred as cases)
+ 3. Perform kernel density estimation to estimate density distribution of results from both step 1 (sub-population) and step 2 (cases)
+ 4. Calculate the ratio map of the case density to the  sub-population density
+For each map cell, summarize the mean, median and etc from all the ratio maps, and output the summarized maps in the form of GeoTIFF.
+
+Prerequisites
+ CUDA
+ GDAL
+
+To run the code, run the executable with only one arguments (the input parameter file)
+ ./DigPopKernelAnalysis <inputParameterFile.csv>
+
+Input parameter file
+The input parameter files let users to specify the input and output of the code, the questions to be answered, and the parameters of the kernel density estimation. The input parameter file is a CSV file, with the first line as the file header and each question per line.
+The meaning of each column is described below: 
+ 1. OutputFileName: the name and directory of output files. It is assumed that output maps will be named as <OutputFile>_mean.tif, <outputFileName>_max.tif and etc.
+ 2. InputDigPopNamePreNumber: the name and directory of input Digital Populations realizations files.
+  i. It is assumed that input household files will be named <InputFile><realization#>-households.csv
+  ii. and population files will be named <InputFile><realization#>-population.csv
+ 3. MinRzn: the index of the first realization to be analyzed
+ 4. NumRzn: the number of realizations to be analyzed
+  i. Realization number is assumed to have three digit in file names
+ 5. ProjectionCode:  the EPSG code indicating the projection information of input coordiates
+ 6. NorthBounds: the north bound (Max of Y) of study area
+ 7. EastBounds: the east bound (Max of X) of study area
+ 8. SouthBounds: the north bound (Min of Y) of study area
+ 9. WestBounds: the north bound (Min of X) of study area
+ 10. LatticeSize: the cell size of output raster maps
+ 11. KernelBandwidth: the bandwidth used by the kernel density estimation
+  i. If a zero(0) bandwidth is used, the code simply count the number of persons (households) in each cell and calculate the ratio
+ 12. HouseholdOrPopulationMap: the indicator of whether the analysis is based on household or population
+  i. H for household. Thus it will calculate the % of households
+  ii. P for population. Thus it will calculate the % of persons that
+ 13. SubPopulation: the conditions of target sub-population. It will be treated as the denominator when calculating the ratio
+  i. If your SubPopulation is All, just put a "*" here, or leave this field empty. In this case, you are calculating the ratio to all the population or households
+  ii. Only support "and" and "or" operator 
+ 14. MapLogic: additional conditions that specify the standards to calculate the ratio for. It will be treated as the numerator when calculating the ratio
+ 15. PersonsPerHousehold:  the column name in the household file which represents the the number of people in each household
+
+Logic condition used in MapLogic and SubPopulation
+The logic conditions used in column SubPoplulation and MapLogic of the input parameter file follow the following rules.
+ 1. Basic condition: <attributeName>:<startValue>:<endValue>. For example, AGE:0:17 means 0<=AGE<=17
+  i. NOT operator: "!" before the attributeName. For example, !AGE:12:17 means NOT 12<=AGE<=17
+  ii. If H is specified in  HhOrPop, only household attributes can be used in SubPoplulation and MapLogic
+  iii. If P is specified in  HhOrPop, both household attributes and population attributes can be used in SubPoplulation and MapLogic
+ 2. "And"  connecting basic conditions: BasicCondition1andBasicCondition2
+  i. AND operator: "and" between basic conditions (no parenthesis is needed and allowed)
+  ii. For example:  AGE:60:999andRELIG:5:5
+ 3. "Or" connecting "and" clause: AndClause1orAndClause1
+  i. OR operator: "or" between AND clasue (no parenthesis is needed and allowed)
+  ii. For example:  AGE:0:12orAGE:13:99andLIT:1:1 means people who are kids ( under 13) or literate order people
+  iii. Can only be applicable to MapLogic but not MapLogic
+
+
+Output
+ 1. <outputFileName>_rzn###.tif: The ratio maps for each realization. rzn### stands for realization number
+ 2. <outputFileName>_mean.tif: The mean value of the ratio maps from all input Digital Populations realizations
+ 3. <outputFileName>_max.tif: The maximum value of the ratio maps from all input Digital Populations realizations
+ 4. <outputFileName>_min.tif: The minimum value of the ratio maps from all input Digital Populations realizations
+ 5. <outputFileName>_1q.tif: The 1st quantile value of the ratio maps from all input Digital Populations realizations
+ 6. <outputFileName>_3q.tif: The 3st quantile value of the ratio maps from all input Digital Populations realizations
+ 7. <outputFileName>_median.tif: The median value of the ratio maps from all input Digital Populations realizations
+ 8. <outputFileName>_nNA.tif: The number of times this map cell has value (not NA) among all the ratio maps from all input Digital Populations realizations
+ 10. <outputFileName>_meanPop.tif: The median value of the sub population maps from all input Digital Populations realizations
+ 11. <outputFileName>_range.tif: The range (max - min) of the ratio maps from all input Digital Populations realizations
+ 12. <outputFileName>_iqr.tif: The inter quantile range (1st quantile - 3rd quantile) of the ratio maps from all input Digital Populations realizations
+ 13. <outputFileName>_metadata.txt: The metadata of the analysis
+
+--------------------------------------------------------------------------------------------------
 DigPopKernelAnalysisV7
 
 Minor bug fixes
