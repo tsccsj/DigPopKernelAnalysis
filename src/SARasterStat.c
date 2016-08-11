@@ -129,7 +129,8 @@ int main(int argc, char ** argv)
 
 	if(argc != 5)
 	{
-		printf("SARasterStat [InputFile] [startRzn] [numRzn] [OutputFile]\n");
+		printf("Incorrect number of input arguments: \n");
+		printf("\tSARasterStat <InputFile> <startRzn> <numRzn> <OutputFile>\n");
 		return 1;
 	}
 
