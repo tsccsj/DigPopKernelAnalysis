@@ -1,10 +1,10 @@
 # DigPopKernelAnalysis
 KernelAnalysis is software developed to create indicator maps from Digital Populations realizations based on the attributes of household attributes and person attributes. It aims to answer questions of this kind: give all or a subset of population (or households), what is the ratio of the population (or households) that meets certain standards. What does it do?
 
-Software instruction at
+#Software instruction
 http://digitalpopulations.pbworks.com/w/page/88807286/KernelAnalysis
 
-What does it do?
+#What does it do?
 For each of the Digital Populations realizations, it performs the following steps:
  1. Find the persons (or households) that belongs to the targeting sub-population by reading through the household and population files of this Digital Populations realization
  2. Find the persons (or households) within the sub-population that meet user-specific conditions (referred as cases)
@@ -12,11 +12,11 @@ For each of the Digital Populations realizations, it performs the following step
  4. Calculate the ratio map of the case density to the  sub-population density
 For each map cell, summarize the mean, median and etc from all the ratio maps, and output the summarized maps in the form of GeoTIFF.
 
-Prerequisites
+#Prerequisites
  CUDA
  GDAL
 
-To run the code, run the executable with only one arguments (the input parameter file)
+#To run the code, run the executable with only one arguments (the input parameter file)
  ./DigPopKernelAnalysis <inputParameterFile.csv>
 
 Input parameter file
@@ -61,7 +61,7 @@ The logic conditions used in column SubPoplulation and MapLogic of the input par
   iii. Can only be applicable to MapLogic but not MapLogic
 
 
-Output
+#Output
  1. <outputFileName>_rzn###.tif: The ratio maps for each realization. rzn### stands for realization number
  2. <outputFileName>_mean.tif: The mean value of the ratio maps from all input Digital Populations realizations
  3. <outputFileName>_max.tif: The maximum value of the ratio maps from all input Digital Populations realizations
@@ -75,6 +75,7 @@ Output
  12. <outputFileName>_iqr.tif: The inter quantile range (1st quantile - 3rd quantile) of the ratio maps from all input Digital Populations realizations
  13. <outputFileName>_metadata.txt: The metadata of the analysis
 
+#Change logs
 --------------------------------------------------------------------------------------------------
 DigPopKernelAnalysisV7
 
