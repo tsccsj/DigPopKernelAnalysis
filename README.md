@@ -17,15 +17,15 @@ For each map cell, summarize the mean, median and etc from all the ratio maps, a
  GDAL
 
 #To run the code, run the executable with only one arguments (the input parameter file)
- ./DigPopKernelAnalysis <inputParameterFile.csv>
+DigPopKernelAnalysis inputParameterFile
 
 Input parameter file
 The input parameter files let users to specify the input and output of the code, the questions to be answered, and the parameters of the kernel density estimation. The input parameter file is a CSV file, with the first line as the file header and each question per line.
 The meaning of each column is described below: 
- 1. OutputFileName: the name and directory of output files. It is assumed that output maps will be named as <OutputFile>_mean.tif, <outputFileName>_max.tif and etc.
+ 1. OutputFileName: the name and directory of output files. It is assumed that output maps will be named as OutputFile_mean.tif, outputFileName_max.tif and etc.
  2. InputDigPopNamePreNumber: the name and directory of input Digital Populations realizations files.
-  i. It is assumed that input household files will be named <InputFile><realization#>-households.csv
-  ii. and population files will be named <InputFile><realization#>-population.csv
+  i. It is assumed that input household files will be named 'InputFile''realizationNumber'-households.csv
+  ii. and population files will be named 'InputFile''realizationNumber'-population.csv
  3. MinRzn: the index of the first realization to be analyzed
  4. NumRzn: the number of realizations to be analyzed
   i. Realization number is assumed to have three digit in file names
@@ -41,14 +41,14 @@ The meaning of each column is described below:
   i. H for household. Thus it will calculate the % of households
   ii. P for population. Thus it will calculate the % of persons that
  13. SubPopulation: the conditions of target sub-population. It will be treated as the denominator when calculating the ratio
-  i. If your SubPopulation is All, just put a "*" here, or leave this field empty. In this case, you are calculating the ratio to all the population or households
+  i. If your SubPopulation is All, just put a "\*" here, or leave this field empty. In this case, you are calculating the ratio to all the population or households
   ii. Only support "and" and "or" operator 
  14. MapLogic: additional conditions that specify the standards to calculate the ratio for. It will be treated as the numerator when calculating the ratio
  15. PersonsPerHousehold:  the column name in the household file which represents the the number of people in each household
 
 Logic condition used in MapLogic and SubPopulation
 The logic conditions used in column SubPoplulation and MapLogic of the input parameter file follow the following rules.
- 1. Basic condition: <attributeName>:<startValue>:<endValue>. For example, AGE:0:17 means 0<=AGE<=17
+ 1. Basic condition: attributeName:startValue:endValue. For example, AGE:0:17 means 0<=AGE<=17
   i. NOT operator: "!" before the attributeName. For example, !AGE:12:17 means NOT 12<=AGE<=17
   ii. If H is specified in  HhOrPop, only household attributes can be used in SubPoplulation and MapLogic
   iii. If P is specified in  HhOrPop, both household attributes and population attributes can be used in SubPoplulation and MapLogic
@@ -62,18 +62,18 @@ The logic conditions used in column SubPoplulation and MapLogic of the input par
 
 
 #Output
- 1. <outputFileName>_rzn###.tif: The ratio maps for each realization. rzn### stands for realization number
- 2. <outputFileName>_mean.tif: The mean value of the ratio maps from all input Digital Populations realizations
- 3. <outputFileName>_max.tif: The maximum value of the ratio maps from all input Digital Populations realizations
- 4. <outputFileName>_min.tif: The minimum value of the ratio maps from all input Digital Populations realizations
- 5. <outputFileName>_1q.tif: The 1st quantile value of the ratio maps from all input Digital Populations realizations
- 6. <outputFileName>_3q.tif: The 3st quantile value of the ratio maps from all input Digital Populations realizations
- 7. <outputFileName>_median.tif: The median value of the ratio maps from all input Digital Populations realizations
- 8. <outputFileName>_nNA.tif: The number of times this map cell has value (not NA) among all the ratio maps from all input Digital Populations realizations
- 10. <outputFileName>_meanPop.tif: The median value of the sub population maps from all input Digital Populations realizations
- 11. <outputFileName>_range.tif: The range (max - min) of the ratio maps from all input Digital Populations realizations
- 12. <outputFileName>_iqr.tif: The inter quantile range (1st quantile - 3rd quantile) of the ratio maps from all input Digital Populations realizations
- 13. <outputFileName>_metadata.txt: The metadata of the analysis
+ 1. 'outputFileName'_rzn'rznNumber'.tif: The ratio maps for each realization.
+ 2. 'outputFileName_mean.tif: The mean value of the ratio maps from all input Digital Populations realizations
+ 3. 'outputFileName'max.tif: The maximum value of the ratio maps from all input Digital Populations realizations
+ 4. 'outputFileName'_min.tif: The minimum value of the ratio maps from all input Digital Populations realizations
+ 5. 'outputFileName'_1q.tif: The 1st quantile value of the ratio maps from all input Digital Populations realizations
+ 6. 'outputFileName'_3q.tif: The 3st quantile value of the ratio maps from all input Digital Populations realizations
+ 7. 'outputFileName'_median.tif: The median value of the ratio maps from all input Digital Populations realizations
+ 8. 'outputFileName'_nNA.tif: The number of times this map cell has value (not NA) among all the ratio maps from all input Digital Populations realizations
+ 10. 'outputFileName'_meanPop.tif: The median value of the sub population maps from all input Digital Populations realizations
+ 11. 'outputFileName'_range.tif: The range (max - min) of the ratio maps from all input Digital Populations realizations
+ 12. 'outputFileName'_iqr.tif: The inter quantile range (1st quantile - 3rd quantile) of the ratio maps from all input Digital Populations realizations
+ 13. 'outputFileName'_metadata.txt: The metadata of the analysis
 
 #Change logs
 --------------------------------------------------------------------------------------------------
@@ -147,7 +147,7 @@ New name for the software!
 --------------------------------------------------------------------------------------------------
 DPIndicatorV5:
 
-To run the code, run DPIndictor <inputFile>
+To run the code, run DPIndictor inputFile
 
 Support the NOT operator
  - For both the subpopualtion and maplogic
@@ -166,7 +166,7 @@ Example:
 --------------------------------------------------------------------------------------------------
 DPIndicatorV4:
 
-To run the code, run DPIndictor <inputFile>
+To run the code, run DPIndictor inputFile
 
 Support subpopulaion
  - The ratio will be calcuated based on the subpopulation
