@@ -6,6 +6,8 @@
 #include <ogr_api.h>
 #include <cpl_conv.h>
 
+#define LINESIZE 40000
+
 struct Condition
 {
 	bool hhAtt;
@@ -24,10 +26,10 @@ int getHHNum(FILE * file)
 	int hhCount = 0;
 
 	rewind(file);
-	char line[4000];
-	fgets(line, 4000, file);
+	char line[LINESIZE];
+	fgets(line, LINESIZE, file);
 
-	while(NULL != fgets(line, 4000, file))
+	while(NULL != fgets(line, LINESIZE, file))
 	{
 		hhCount ++;
 	}
@@ -42,8 +44,8 @@ bool readPointsP(FILE * hhFile, FILE * popFile, int nHH, int &popCount, int &pNC
 
 	int numHHAtt;
 	
-	char hhLine[4000];
-	char popLine[4000];
+	char hhLine[LINESIZE];
+	char popLine[LINESIZE];
 
 	popCount = 0;
 	pNCase = 0;
@@ -56,7 +58,7 @@ bool readPointsP(FILE * hhFile, FILE * popFile, int nHH, int &popCount, int &pNC
 
 	//Process the person-per-household
 	rewind(hhFile);
-    if(NULL == (fgets(hhLine, 4000, hhFile)))
+    if(NULL == (fgets(hhLine, LINESIZE, hhFile)))
 	{
 		printf("ERROR: Corrupted household file at line 1.\n");
 		return false;
@@ -161,12 +163,12 @@ bool readPointsP(FILE * hhFile, FILE * popFile, int nHH, int &popCount, int &pNC
 
 		rewind(hhFile);
 		rewind(popFile);
-		if(NULL == (fgets(hhLine, 4000, hhFile)))
+		if(NULL == (fgets(hhLine, LINESIZE, hhFile)))
 		{
 			printf("ERROR: Corrupted household file at line 1.\n");
 			return false;
 		}
-		if(NULL == (fgets(popLine, 4000, popFile)))
+		if(NULL == (fgets(popLine, LINESIZE, popFile)))
 		{
 			printf("ERROR: Corrupted population file at line 1.\n");
 			return false;
@@ -252,7 +254,7 @@ bool readPointsP(FILE * hhFile, FILE * popFile, int nHH, int &popCount, int &pNC
 
 		for(hhID = 0; hhID < nHH; hhID ++)
 		{
-			if(NULL == (fgets(hhLine, 4000, hhFile)))
+			if(NULL == (fgets(hhLine, LINESIZE, hhFile)))
 			{
 				printf("ERROR: Corrupted household file at line %d\n", hhID + 2);
 				return false;
@@ -312,7 +314,7 @@ bool readPointsP(FILE * hhFile, FILE * popFile, int nHH, int &popCount, int &pNC
 			{
 				for(int i = 0; i < persons; i++)
 				{
-					if(NULL == (fgets(popLine, 4000, popFile)))
+					if(NULL == (fgets(popLine, LINESIZE, popFile)))
 					{
 						printf("ERROR: Corrupted population file at line %d\n", popLineCount);
 						return false;
@@ -364,7 +366,7 @@ bool readPointsP(FILE * hhFile, FILE * popFile, int nHH, int &popCount, int &pNC
 			{
 				for(int i = 0; i < persons; i++)
 				{
-					if(NULL == (fgets(popLine, 4000, popFile)))
+					if(NULL == (fgets(popLine, LINESIZE, popFile)))
 					{
 						printf("ERROR: Corrupted input population file at line %d.\n", popLineCount);
 						return false;
@@ -459,8 +461,8 @@ bool readPointsH(FILE * file, int nHH, int &positiveCount, float * xCol, float *
 		}
 
 		rewind(file);
-		char line[4000];
-		if(NULL == (fgets(line, 4000, file)))
+		char line[LINESIZE];
+		if(NULL == (fgets(line, LINESIZE, file)))
 		{
 			printf("ERROR: Corrupted household file at line 0\n");
 			return false;
@@ -506,7 +508,7 @@ bool readPointsH(FILE * file, int nHH, int &positiveCount, float * xCol, float *
 		}
 
 		hhID = -1;
-		while(NULL != fgets(line, 4000, file))
+		while(NULL != fgets(line, LINESIZE, file))
 		{
 			att[0] = strtok(line, ",");
 			for(int i = 1; i < numHHAtt; i ++)
@@ -640,14 +642,14 @@ bool readPointsPInSubPop(FILE * hhFile, FILE * popFile, int nHH, int &popCount, 
 
 	rewind(hhFile);
 	rewind(popFile);
-	char hhLine[4000];
-	char popLine[4000];
-	if(NULL == (fgets(hhLine, 4000, hhFile)))
+	char hhLine[LINESIZE];
+	char popLine[LINESIZE];
+	if(NULL == (fgets(hhLine, LINESIZE, hhFile)))
 	{
 		printf("ERROR: Corrupted household file at line 1.\n");
 		return false;
 	}
-	if(NULL == (fgets(popLine, 4000, popFile)))
+	if(NULL == (fgets(popLine, LINESIZE, popFile)))
 	{
 		printf("ERROR: Corrupted population file at line 1.\n");
 		return false;
@@ -796,12 +798,12 @@ bool readPointsPInSubPop(FILE * hhFile, FILE * popFile, int nHH, int &popCount, 
 
 		rewind(hhFile);
 		rewind(popFile);
-		if(NULL == (fgets(hhLine, 4000, hhFile)))
+		if(NULL == (fgets(hhLine, LINESIZE, hhFile)))
 		{
 			printf("ERROR: Corrupted household file at line 1.\n");
 			return false;
 		} 
-		if(NULL == (fgets(popLine, 4000, popFile)))
+		if(NULL == (fgets(popLine, LINESIZE, popFile)))
 		{
 			printf("ERROR: Corrupted population file at line 1.\n");
 			return false;
@@ -879,7 +881,7 @@ bool readPointsPInSubPop(FILE * hhFile, FILE * popFile, int nHH, int &popCount, 
 
 		for(hhID = 0; hhID < nHH; hhID ++)
 		{
-			if(NULL == (fgets(hhLine, 4000, hhFile)))
+			if(NULL == (fgets(hhLine, LINESIZE, hhFile)))
 			{
 				printf("ERROR: Corrupted household file at line %d\n", hhID + 2);
 				return false;
@@ -977,7 +979,7 @@ bool readPointsPInSubPop(FILE * hhFile, FILE * popFile, int nHH, int &popCount, 
 
 				for(int i = 0; i < persons; i++)
 				{
-					if(NULL == (fgets(popLine, 4000, popFile)))
+					if(NULL == (fgets(popLine, LINESIZE, popFile)))
 					{
 						printf("ERROR: Corrupted population file at line %d.\n", popLineCount);
 						return false;
@@ -1061,7 +1063,7 @@ bool readPointsPInSubPop(FILE * hhFile, FILE * popFile, int nHH, int &popCount, 
 			{
 				for(int i = 0; i < persons; i++)
 				{
-					if(NULL == (fgets(popLine, 4000, popFile)))
+					if(NULL == (fgets(popLine, LINESIZE, popFile)))
 					{
 						printf("ERROR: Corrupted population file at line %d.\n", popLineCount);
 						return false;
@@ -1141,8 +1143,8 @@ bool readPointsHInSubPop(FILE * file, int nHH, int &positiveCount, float * xCol,
 	}
 
 	rewind(file);
-	char line[4000];
-	if(NULL == (fgets(line, 4000, file)))
+	char line[LINESIZE];
+	if(NULL == (fgets(line, LINESIZE, file)))
 	{
 		printf("ERROR: Corrupted household file at line 1.\n");
 		return false;
@@ -1240,7 +1242,7 @@ bool readPointsHInSubPop(FILE * file, int nHH, int &positiveCount, float * xCol,
 		}
 
 		rewind(file);
-		if(NULL == (fgets(line, 4000, file)))
+		if(NULL == (fgets(line, LINESIZE, file)))
 		{
 			printf("ERROR: Corrupted household file at line 1.\n");
 			return false;
@@ -1281,7 +1283,7 @@ bool readPointsHInSubPop(FILE * file, int nHH, int &positiveCount, float * xCol,
 		}
 
 		hhID = -1;
-		while(NULL != fgets(line, 4000, file))
+		while(NULL != fgets(line, LINESIZE, file))
 		{
 			att[0] = strtok(line, ",");
 			for(int i = 1; i < numHHAtt; i ++)
