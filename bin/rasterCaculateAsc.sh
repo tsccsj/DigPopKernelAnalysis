@@ -1,5 +1,5 @@
 #!/bin/bash
-#Script to calcuate conduct raster caclulated using gdal_calc.py, the input and output are in geotiff
+#Script to calcuate conduct raster caclulated using gdal_calc.py, the input and output are in ascii grid
 #Yizhao Gao (yizhaotsccsj@gmail.com)
 
 args=($@)

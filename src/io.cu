@@ -1,3 +1,7 @@
+/*	
+ *		Contributors: Yizhao Gao (yizhaotsccsj@gmail.com)
+ */
+
 #include <stdio.h>
 #include <string.h>
 #include "io.cuh"

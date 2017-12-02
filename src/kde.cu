@@ -1,3 +1,7 @@
+/*	
+ *		Contributors: Yizhao Gao (yizhaotsccsj@gmail.com)
+ */
+
 #include <stdio.h>
 #include "kde.cuh"
 #include "cudaErrorCheck.cu"
